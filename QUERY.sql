@@ -21,3 +21,20 @@ CREATE TABLE Users (
     phone_number VARCHAR(15)
 );
 
+-- =========================================================================
+-- 2. CREATE MATCHES TABLE
+-- =========================================================================
+CREATE TABLE matches (
+    match_id SERIAL PRIMARY KEY,
+    fixture VARCHAR(100) NOT NULL,
+    tournament_category VARCHAR(100) NOT NULL,
+    base_ticket_price INT CHECK (base_ticket_price > 0),
+    match_status VARCHAR(50) CHECK (
+        match_status IN (
+            'Available',
+            'Selling Fast',
+            'Sold Out',
+            'Postponed'
+        )
+    )
+);
