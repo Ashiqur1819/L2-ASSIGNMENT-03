@@ -209,3 +209,13 @@ FROM
     bookings
     INNER JOIN users ON bookings.user_id = users.user_id
     INNER JOIN matches ON bookings.match_id = matches.match_id;
+
+    -- =========================================================================
+    -- QUERY: 05
+    -- =========================================================================
+SELECT 
+    users.user_id, 
+    users.full_name, 
+    bookings.booking_id
+FROM users
+LEFT JOIN bookings ON users.user_id = bookings.user_id;
