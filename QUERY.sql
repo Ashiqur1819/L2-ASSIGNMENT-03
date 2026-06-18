@@ -101,3 +101,8 @@ SELECT match_id, fixture, base_ticket_price FROM matches WHERE tournament_catego
 -- QUERY: 02
 -- =========================================================================
 SELECT user_id, full_name, email FROM users WHERE full_name ILIKE 'tanvir%' OR full_name ILIKE '%haque%';
+-- =========================================================================
+
+-- QUERY: 03
+-- =========================================================================
+SELECT booking_id, user_id, match_id, COALESCE(payment_status, 'Action Required') AS systematic_status FROM bookings WHERE payment_status IS NULL
