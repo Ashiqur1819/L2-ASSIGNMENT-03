@@ -95,3 +95,9 @@ INSERT INTO bookings (booking_id, user_id, match_id, seat_number, payment_status
 -- QUERY: 01
 -- =========================================================================
 SELECT match_id, fixture, base_ticket_price FROM matches WHERE tournament_category = 'Champions League' AND match_status = 'Available'
+
+
+-- =========================================================================
+-- QUERY: 02
+-- =========================================================================
+SELECT user_id, full_name, email FROM users WHERE full_name ILIKE 'tanvir%' OR full_name ILIKE '%haque%';
