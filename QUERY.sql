@@ -170,10 +170,11 @@ FROM
     matches
 WHERE
     tournament_category = 'Champions League'
-    AND match_status = 'Available'
-    -- =========================================================================
-    -- QUERY: 02
-    -- =========================================================================
+    AND match_status = 'Available';
+
+-- =========================================================================
+-- QUERY: 02
+-- =========================================================================
 SELECT
     user_id,
     full_name,
@@ -195,11 +196,11 @@ SELECT
 FROM
     bookings
 WHERE
-    payment_status IS NULL
+    payment_status IS NULL;
 
-    -- =========================================================================
-    -- QUERY: 04
-    -- =========================================================================
+-- =========================================================================
+-- QUERY: 04
+-- =========================================================================
 SELECT
     bookings.booking_id,
     users.full_name,
@@ -210,12 +211,46 @@ FROM
     INNER JOIN users ON bookings.user_id = users.user_id
     INNER JOIN matches ON bookings.match_id = matches.match_id;
 
-    -- =========================================================================
-    -- QUERY: 05
-    -- =========================================================================
-SELECT 
-    users.user_id, 
-    users.full_name, 
+-- =========================================================================
+-- QUERY: 05
+-- =========================================================================
+SELECT
+    users.user_id,
+    users.full_name,
     bookings.booking_id
-FROM users
-LEFT JOIN bookings ON users.user_id = bookings.user_id;
+FROM
+    users
+    LEFT JOIN bookings ON users.user_id = bookings.user_id;
+
+-- =========================================================================
+-- QUERY: 06
+-- =========================================================================
+SELECT
+    booking_id,
+    match_id,
+    total_cost
+FROM
+    bookings
+WHERE
+    total_cost > (
+        SELECT
+            AVG(total_cost)
+        FROM
+            bookings
+    );
+
+-- =========================================================================
+-- QUERY: 07
+-- =========================================================================
+SELECT
+    match_id,
+    fixture,
+    base_ticket_price
+FROM
+    matches
+ORDER BY
+    base_ticket_price DESC
+LIMIT
+    2
+OFFSET
+    1;
